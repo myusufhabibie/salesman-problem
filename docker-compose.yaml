@@ -1,0 +1,22 @@
+services:
+    
+    # Application
+    app:
+        build:
+            context: .
+            dockerfile: app.dockerfile
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+    # Web Server
+    web:
+        build:
+            context: .
+            dockerfile: web.dockerfile
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - "app"
+        ports:
+            - 8081:8081
